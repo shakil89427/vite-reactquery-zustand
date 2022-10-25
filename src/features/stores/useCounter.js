@@ -1,16 +1,15 @@
 import create from "zustand";
-import { persist } from "zustand/middleware";
 
-const initials = (set, get) => ({
+const useCounter = create((set, get) => ({
   value: 1,
   increament: () => {
-    set(({ value }) => ({ value: value < 10 ? value + 1 : value }));
+    const { value } = get();
+    value < 10 && set({ value: value + 1 });
   },
   decreament: () => {
-    set(({ value }) => ({ value: value > 1 ? value - 1 : value }));
+    const { value } = get();
+    value > 1 && set({ value: value - 1 });
   },
-});
-
-const useCounter = create(persist(initials, { name: "counter" }));
+}));
 
 export default useCounter;
