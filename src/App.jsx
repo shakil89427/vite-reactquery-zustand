@@ -1,25 +1,12 @@
-import "./App.css";
-import useUsersQuery from "./hooks/queries/useUsersQuery";
-import useCounterStore from "./Store/useCounterStore";
+import Counter from "./components/Counter";
+import User from "./components/User";
 
 function App() {
-  const store = useCounterStore();
-  const { data, error, isLoading, isError } = useUsersQuery(store.value);
-
-  if (isLoading) {
-    return <p>Loading</p>;
-  }
-  if (isError) {
-    console.log(error);
-  }
-
   return (
-    <div className="App">
-      <p>{store.value}</p>
-      <button onClick={store.decreament}>-</button>
-      <button onClick={store.increament}>+</button>
-      <p>{JSON.stringify(data)}</p>
-    </div>
+    <>
+      <Counter />
+      <User />
+    </>
   );
 }
 
